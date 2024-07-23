@@ -1,7 +1,7 @@
 <?php
 require_once 'Conexion.php';
 
-class Cliente extends Conexion
+class Clientes extends Conexion
 {
     public $cliente_id;
     public $cliente_nombre;

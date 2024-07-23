@@ -87,7 +87,7 @@ const getCliente = async () => {
                 fragment.appendChild(tr)
             }
         } else {
-            console.log('hola');
+            // console.log('hola');
         }
 
         tablaClientes.tBodies[0].appendChild(fragment)
@@ -96,12 +96,13 @@ const getCliente = async () => {
     }
 }
 
-// getClientes();
+async function getClientes() {
+    console.log("Clientes obtenidos");
+}getClientes();
 
-
-const guardarCliente = async (e) => {
-    e.preventDefault();
-    btnGuardar.disabled = true;
+async function guardarClientes(e) {
+    e.preventDefault()
+    btnGuardar.disabled = true
 
     const url = '/castellanos_rivera_crudjs/controllers/cliente/index.php'
     const formData = new FormData(formulario)
@@ -113,10 +114,10 @@ const guardarCliente = async (e) => {
     }
 
     try {
-        const respuesta = await fetch(url, config);
-        const data = await respuesta.json();
+        const respuesta = await fetch(url, config)
+        const data = await respuesta.json()
         const { mensaje, codigo, detalle } = data
-        console.log(data);
+        console.log(data)
         Swal.mixin({
             toast: true,
             position: "top-end",
@@ -126,26 +127,24 @@ const guardarCliente = async (e) => {
             icon: "success",
             title: mensaje,
             didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
+                toast.onmouseenter = Swal.stopTimer
+                toast.onmouseleave = Swal.resumeTimer
             }
-        }).fire();
-        // alert(mensaje)
-        // console.log(data);
+        }).fire()
+        alert(mensaje)
+        console.log(data)
         if (codigo == 1 && respuesta.status == 200) {
-            // getProductos();
-            formulario.reset();
+            getClientes()
+            formulario.reset()
         } else {
-            console.log(detalle);
+            console.log(detalle)
         }
 
     } catch (error) {
-        console.log(error);
+        console.log(error)
     }
-    btnGuardar.disabled = false;
+    btnGuardar.disabled = false
 }
 
-
-
-formulario.addEventListener('submit', guardarProducto)
-btnBuscar.addEventListener('click', getProductos)
+formulario.addEventListener('submit', guardarClientes)
+btnBuscar.addEventListener('click', getCliente)

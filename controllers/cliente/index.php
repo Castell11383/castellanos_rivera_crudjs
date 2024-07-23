@@ -10,7 +10,7 @@ $tipo = $_REQUEST['tipo'];
 try {
     switch ($metodo) {
         case 'POST':
-            $cliente = new Cliente($_POST);
+            $cliente = new Clientes($_POST);
             switch ($tipo) {
                 case '1':
 
@@ -30,7 +30,7 @@ try {
             break;
         case 'GET':
             http_response_code(200);
-            $cliente = new Cliente($_GET);
+            $cliente = new Clientes($_GET);
             $clientes = $cliente->buscar();
             echo json_encode($clientes);
             break;

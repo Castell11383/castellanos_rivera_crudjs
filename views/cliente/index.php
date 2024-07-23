@@ -2,7 +2,7 @@
 <div class="container">
     <h1 class="text-center">Formulario de clientes</h1>
     <div class="row justify-content-center mb-3">
-        <form class="col-lg-8 border bg-light p-3">
+        <form class="col-lg-8 border bg-dark bg-gradient text-white text-center p-3">
             <input type="hidden" name="cliente_id" id="cliente_id">
             <div class="row mb-3">
                 <div class="col">
@@ -65,5 +65,5 @@
     </div>
 </div>
 <script defer src="../../src/js/funciones.js"></script>
-<script defer src="../../src/js/clientes/index.js"></script>
+<script defer src="../../src/js/cliente/index.js"></script>
 <?php include_once '../../includes/footer.php' ?>
