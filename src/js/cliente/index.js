@@ -9,7 +9,7 @@ const formulario = document.querySelector('form')
 btnModificar.parentElement.style.display = 'none'
 btnCancelar.parentElement.style.display = 'none'
 
-const getCliente = async () => {
+const getCliente = async (alerta='si') => {
     const nombre = formulario.cliente_nombre.value
     const apellido = formulario.cliente_apellido.value
     const genero = formulario.cliente_genero.value
@@ -27,19 +27,22 @@ const getCliente = async () => {
         let contador = 1;
         console.log(data);
         if (respuesta.status == 200) {
-            Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                icon: "success",
-                title: 'Clientes encontrados',
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            }).fire();
+            if(alerta == 'si'){
+                Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true,
+                    icon: "success",
+                    title: 'Clientes encontrados',
+                    didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                    }
+                }).fire();
+            }
+           
 
             if (data.length > 0) {
                 data.forEach(cliente => {
@@ -103,7 +106,7 @@ const getCliente = async () => {
     }
 }
 
-getCliente();
+
 const llenarDatos = (cliente) => {
 
     // console.log(cliente)
@@ -154,7 +157,7 @@ const ModificarClientes = async (e) => {
         alert(mensaje)
         if (codigo == 2 && respuesta.status == 200) {
             formulario.reset()
-            getCliente();
+            getCliente(alerta='no');
             btnModificar.parentElement.style.display = 'none'
             btnCancelar.parentElement.style.display = 'none'
             btnGuardar.parentElement.style.display = ''
@@ -205,7 +208,7 @@ const guardarClientes = async (e) => {
         alert(mensaje)
         if (codigo == 1 && respuesta.status == 200) {
             formulario.reset()
-            getCliente();
+            getCliente(alerta='no');
         } else {
             console.log(detalle)
         }
@@ -261,7 +264,7 @@ const cancelar = () => {
         alert(mensaje)
         if (codigo == 3 && respuesta.status == 200) {
             formulario.reset()
-            getCliente();
+            getCliente(alerta='no');
             btnModificar.parentElement.style.display = 'none'
             btnCancelar.parentElement.style.display = 'none'
             btnGuardar.parentElement.style.display = ''
@@ -277,7 +280,10 @@ const cancelar = () => {
     btnModificar.disabled = false
 }
 
+getCliente();
+
+
 formulario.addEventListener('submit', guardarClientes)
 btnModificar.addEventListener('click', ModificarClientes)
-btnBuscar.addEventListener('click', getCliente)
+btnBuscar.addEventListener('click',() => { getCliente(alerta='si') } )
 btnCancelar.addEventListener('click', cancelar)

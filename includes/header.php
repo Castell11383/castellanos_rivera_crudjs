@@ -32,7 +32,7 @@
         }
 
         100% {
-            background-position: 0% 0%;
+            background-position: 25% 25%;
         }
     }
 </style>
